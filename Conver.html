@@ -89,6 +89,7 @@
     </div>
 
       <script type="text/javascript">
+        /* Code de conversion Decimale => Binaire */ 
 
       	 function DecToBin()
           {
@@ -166,11 +167,11 @@
 }
 
 
-
+   /* Code de conversion Decimale => Octale */
 
         function DecToOct(){
             var b = document.getElementById("huu").value;
-            if ((/[^0-9]/g.test(b)) || b == "") {
+            if ((/[^0-9-"."]/g.test(b)) || b == "") {
             alert ("You must enter an integer decimal number!");
             document.getElementById("huu").value = "";
             document.getElementById("huu").focus();
@@ -179,16 +180,55 @@
 
             }
 
-            
-         b = parseInt(b);
+        if (/["."]/g.test(b)){ 
+         b = parseFloat(b);
 
          var bit1=[];
          var temp1 = 0;
+         var y=Math.trunc(b)
+         var x=b-Math.trunc(b);
+                
+         while(y>0){
+          temp1=y%8;
+          bit1.push(temp1);
+          y=(y-temp1)/8;
+          
+
+         }
+         bit1.push(",");
+
+         var p = 0;
          
+                while( p<4)
+                  {
+                    x=x*8;
+                    
+                      
+                      bit1.push(Math.trunc(x));
+                      x=x-Math.trunc(x);
+                              
+                    
+                    p++;
+                  }
+                  document.getElementById("result1").innerHTML=bit1.join("");
          
+         }
+
+
+
+
+
+        
+         else
+          if (/[^"."]/g.test(b)){
+
+            b = parseFloat(b);
+              var bit1=[];
+              var temp1 = 0;
          
          while(b>0)
          {
+
           temp1=b%8;
           bit1.push(temp1);
           b=(b-temp1)/8;
@@ -197,15 +237,29 @@
          }
           
         bit1.reverse();
+
+        }
         document.getElementById("result1").innerHTML=bit1.join("");
         }
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+        /* Code de conversion Decimale => Hexadecimale */
 
          function DecToHex(){
             var c = document.getElementById("huuh").value;
-            if ((/[^0-9]/g.test(c)) || c == "") {
+            if ((/[^0-9-"."]/g.test(c)) || c == "") {
             alert ("You must enter an integer decimal number!");
             document.getElementById("huuh").value = "";
             document.getElementById("huuh").focus();
@@ -214,8 +268,59 @@
 
             }
 
-            
-         c = parseInt(c);
+           
+            if (/["."]/g.test(c)){ 
+         c = parseFloat(c);
+
+         var bit2=[];
+         var temp2 = 0;
+         var y=Math.trunc(c);
+         var x=c-Math.trunc(c);
+                
+         while(y>0){
+          temp2=y%16;
+          if(temp2<10){  
+          bit2.push(temp2);
+          }else {
+           
+            bit2.push(String.fromCharCode(55+temp2));
+          }
+
+          y=(y-temp2)/16;
+          document.getElementById("result2").innerHTML=bit2.join("");
+
+          
+
+         }
+
+         bit2.push(",");
+
+         var p = 0;
+         
+                while( p<4)
+                  {
+                    x=x*16;
+                    var h=Math.trunc(x);
+                    if (h<10){
+                      bit2.push(h);
+                    }else {
+           
+            bit2.push(String.fromCharCode(55+h));
+          }
+                      
+                      
+                      x=x-h;
+                              
+                    
+                    p++;
+                  }
+                  document.getElementById("result2").innerHTML=bit2.join("");
+         
+         }
+         
+         else
+          if (/[^"."]/g.test(c)){
+               c = parseInt(c);
 
          var bit2=[];
          var temp2 = 0;
@@ -241,7 +346,17 @@
         document.getElementById("result2").innerHTML=bit2.join("");
         
 
+            
+        }
+
+
+
+
+
+          
+        
      }
+  
      
 
       </script>
@@ -252,4 +367,5 @@
       
    </body>
 </html
+
 
