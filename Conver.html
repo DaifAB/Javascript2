@@ -102,29 +102,7 @@
               return false;
             }
 
-            if (/[^"."]/g.test(a))
-            {
-              a = parseInt(a);
-              var bit=[];
-              var temp = 0;
-         
-         
-         
-              while(a>0)
-                {
-                  temp=a%2;
-                  bit.push(temp);
-                  a=(a-temp)/2;
-          
-
-                }
-          
-            bit.reverse();
-
-            
-            }
-
-            else if (/["."]/g.test(a))
+            if (/["."]/g.test(a))
               {
                 a=parseFloat(a);
                 var y=Math.trunc(a)
@@ -147,11 +125,38 @@
                 while( p<4)
                   {
                     x=x*2;
-                    if (x>1) bit.push("1");
+                    if (x>=1) {
+                      bit.push("1");
+                      x=x-Math.trunc(x);
+                              }
                     else bit.push("0");
                     p++;
                   }
-              }
+              } else 
+
+            if (/[^"."]/g.test(a))
+            {
+              a = parseInt(a);
+              var bit=[];
+              var temp = 0;
+         
+         
+         
+              while(a>0)
+                {
+                  temp=a%2;
+                  bit.push(temp);
+                  a=(a-temp)/2;
+          
+
+                }
+          
+            bit.reverse();
+
+            
+            }
+
+            
 
 
           
